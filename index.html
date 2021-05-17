@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>예재</title>
+    <style media="screen">
+      *{margin: 0; padding: 0;}
+      header{width: 100%; text-align: center; height: 50px; position: fixed;}
+      b{display: inline-block; margin-left: 50px; padding-top: 15px; cursor: pointer;}
+      div{width: 100vw; height: 100vh;}
+      #window1{background-color: orange;}
+      #window2{background-color: pink;}
+      #window3{background-color: gray;}
+      #window4{background-color: skyblue;}
+    </style>
+  </head>
+  <body>
+    <header>
+      <b id="bt01">menu1</b>
+      <b id="bt02">menu2</b>
+      <b id="bt03">menu3</b>
+      <b id="bt04">menu4</b>
+    </header>
+     <section>
+       <div id="window1">1</div>
+       <div id="window2">2</div>
+       <div id="window3">3</div>
+       <div id="window4">4</div>
+     </section>
+      <script type="text/javascript">
+        // start_position();
+        // 원페이지 메뉴누르면 해당 영역으로 이동
+  $("#bt01").click(function () {
+    var position = $("#window1").offset();
+    $("body").stop().animate({scrollTop:position.top},500);
+  });  //offset 해당 객체의 위치값을 받아오는 것
+  $("#bt02").click(function () {
+    var position = $("#window2").offset();
+    $("body").stop().animate({scrollTop:position.top},500);
+  });  // scrollTop 선택한 요소의 상하 스크롤 위치를 얻거나 설정하는 메소드
+  $("#bt03").click(function () {
+    var position = $("#window3").offset();
+    $("body").stop().animate({scrollTop:position.top},500);
+  });  // stop 중복방지
+  $("#bt04").click(function () {
+    var position = $("#window4").offset();
+    $("body").stop().animate({scrollTop:position.top},500);
+  });
+        // 처음에 아래에서 위로 올리기
+        function start_position() {
+          var position = $("#window4").offset();
+          $("html,body").animate({scrollTop:position.top},0);
+          var position = $("#window1").offset();
+          $("html,body").animate({scrollTop:position.top},1000);
+        }
+        // 스크롤 이벤트
+        $(document).scroll(function () {
+          var st = $(this).scrollTop();
+          $("#bt04").text(st);
+          var sb = $("#window1").height();
+          $("#bt03").text(sb);
+
+        // 메뉴 아래로 내리기
+          if(st >= sb){
+            $("header").css("top", sb-100);
+          } else {
+            $("header").css("top", 0);
+          }
+        });
+      </script>
+  </body>
+</html>
